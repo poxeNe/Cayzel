@@ -22,6 +22,7 @@ class Action:
 
 
 class EscapeAction(Action):
+    
     # There are 2 perform functions in different classes? Classes confuse me.
    def perform(self, engine: Engine, entity: Entity) -> None:
 
