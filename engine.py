@@ -1,49 +1,70 @@
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
 # from typing import Set, Iterable, Any
-from typing import Iterable, Any
+# from typing import Iterable, Any
 
 from tcod.context import Context
 from tcod.console import Console
 from tcod.map import compute_fov
 
 # from actions import EscapeAction, MovementAction
-from entity import Entity
-from game_map import GameMap
+# from entity import Entity
+# from game_map import GameMap
 from input_handlers import EventHandler
 
+if TYPE_CHECKING:
+    
+    from entity import Entity
+    from game_map import GameMap
 
 class Engine:
 
+    game_map: GameMap
+
     # def __init__(self, entities: Set[Entity], event_handler: EventHandler, player: Entity):
     # def __init__(self, entities: Set[Entity], event_handler: EventHandler, game_map: GameMap, player: Entity):
-    def __init__(self, event_handler: EventHandler, game_map: GameMap, player: Entity):
+    # def __init__(self, event_handler: EventHandler, game_map: GameMap, player: Entity):
 
-        # self.entities = entities
-        self.event_handler = event_handler
-        self.game_map = game_map
+    #     # self.entities = entities
+    #     self.event_handler = event_handler
+    #     self.game_map = game_map
+    #     self.player = player
+    #     self.update_fov()
+
+    def __init__(self, player: Entity):
+
+        self.event_handler: EventHandler = EventHandler(self)
         self.player = player
-        self.update_fov()
 
     def handle_enemy_turns(self) -> None:
 
-        for entity in self.game_map.entities - {self.player}:
+        for entity in set(self.game_map.actors) - {self.player}:
+
+            if entity.ai:
+
+                entity.ai.perform()
             
-            print(f'The {entity.name} wonders when it will get to take a real turn')
+        # for entity in self.game_map.entities - {self.player}:
 
-    def handle_events(self, events: Iterable[Any]) -> None:
+            # print(f'The {entity.name} wonders when it will get to take a real turn')
 
-        for event in events:
+    # def handle_events(self, events: Iterable[Any]) -> None:
 
-            action = self.event_handler.dispatch(event)
+    #     for event in events:
 
-            if action is None:
+    #         action = self.event_handler.dispatch(event)
 
-                continue
+    #         if action is None:
 
-            action.perform(self, self.player)
+    #             continue
 
-            self.handle_enemy_turns()
+    #         action.perform(self, self.player)
 
-            self.update_fov() # Update the FOC before the player's next action.
+    #         self.handle_enemy_turns()
+
+    #         self.update_fov() # Update the FOC before the player's next action.
             
     def update_fov(self) -> None:
 

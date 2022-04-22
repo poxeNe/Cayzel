@@ -7,7 +7,7 @@ from engine import Engine
 # from entity import Entity
 import entity_factories
 # from game_map import GameMap
-from input_handlers import EventHandler
+# from input_handlers import EventHandler
 from procgen import generate_dungeon
 
 def main() -> None:
@@ -33,16 +33,19 @@ def main() -> None:
 
     )
 
-    event_handler = EventHandler()
+    # event_handler = EventHandler()
+    player = copy.deepcopy(entity_factories.player)
 
     # player = Entity(int(screen_width / 2), int(screen_height / 2), "@", (255, 255, 255))
-    player = copy.deepcopy(entity_factories.player)
+    # player = copy.deepcopy(entity_factories.player)
+    engine = Engine(player=player)
     # npc = Entity(int(screen_width / 2 - 5), int(screen_height / 2), "@", (255, 255, 0))
     # entities = {npc, player}
 
     # game_map = GameMap(map_width, map_height)
     # game_map = generate_dungeon(map_width, map_height)
-    game_map = generate_dungeon(
+    # game_map = generate_dungeon(
+    engine.game_map = generate_dungeon(
 
         max_rooms=max_rooms,
         room_min_size=room_min_size,
@@ -50,13 +53,16 @@ def main() -> None:
         map_width=map_width,
         map_height=map_height,
         max_monsters_per_room=max_monsters_per_room,
-        player=player
+        # player=player
+        engine=engine
 
     )
 
+    engine.update_fov()
+
     # engine = Engine(entities=entities, event_handler=event_handler, player=player)
     # engine = Engine(entities=entities, event_handler=event_handler, game_map=game_map, player=player)
-    engine = Engine(event_handler=event_handler, game_map=game_map, player=player)
+    # engine = Engine(event_handler=event_handler, game_map=game_map, player=player)
 
     with tcod.context.new_terminal(
 
@@ -77,9 +83,9 @@ def main() -> None:
             engine.render(console=root_console, context=context)
 
             # context.present(root_console)
-            events = tcod.event.wait()
-            
-            engine.handle_events(events)
+            # events = tcod.event.wait()
+            engine.event_handler.handle_events()
+            # engine.handle_events(events)
             # root_console.clear()
 
             # for event in tcod.event.wait():
