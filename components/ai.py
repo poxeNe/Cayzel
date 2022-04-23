@@ -1,12 +1,7 @@
 from __future__ import annotations
-
-# from typing import List, Tuple
 from typing import List, Tuple, TYPE_CHECKING
-
 import numpy as np  # type: ignore
 import tcod
-
-# from actions import Action
 from actions import Action, MeleeAction, MovementAction, WaitAction
 from components.base_component import BaseComponent
 

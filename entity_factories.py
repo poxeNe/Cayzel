@@ -13,13 +13,12 @@ player = Actor(
 
 )
 
-# player = Entity(char="@", color=(255, 255, 255), name="Player", blocks_movement=True)
 
 orc = Actor(
 
     char="o",
     color=(63, 127, 63),
-    name="Troll",
+    name="Orc",
     ai_cls=HostileEnemy,
     fighter=Fighter(hp=16, defense=1, power=4),
 
@@ -35,5 +34,3 @@ troll = Actor(
 
 )
 
-# orc = Entity(char="o", color=(63, 127, 63), name="Orc", blocks_movement=True)
-# troll = Entity(char="T", color=(0, 127, 0), name="Troll", blocks_movement=True)

@@ -1,31 +1,21 @@
 #!/usr/bin/env python3
 import copy
-
 import tcod
-
+import color
 from engine import Engine
-# from entity import Entity
 import entity_factories
-# from game_map import GameMap
-# from input_handlers import EventHandler
 from procgen import generate_dungeon
 
 def main() -> None:
 
     screen_width = 80
     screen_height = 50
-
     map_width = 80
-    map_height = 45
-
+    map_height = 43
     room_max_size = 10
     room_min_size = 6
     max_rooms = 30
-
     max_monsters_per_room = 2
-    
-    # player_x = int(screen_width / 2)
-    # player_y = int(screen_height / 2)
 
     tileset = tcod.tileset.load_tilesheet(
 
@@ -33,18 +23,8 @@ def main() -> None:
 
     )
 
-    # event_handler = EventHandler()
     player = copy.deepcopy(entity_factories.player)
-
-    # player = Entity(int(screen_width / 2), int(screen_height / 2), "@", (255, 255, 255))
-    # player = copy.deepcopy(entity_factories.player)
     engine = Engine(player=player)
-    # npc = Entity(int(screen_width / 2 - 5), int(screen_height / 2), "@", (255, 255, 0))
-    # entities = {npc, player}
-
-    # game_map = GameMap(map_width, map_height)
-    # game_map = generate_dungeon(map_width, map_height)
-    # game_map = generate_dungeon(
     engine.game_map = generate_dungeon(
 
         max_rooms=max_rooms,
@@ -53,16 +33,16 @@ def main() -> None:
         map_width=map_width,
         map_height=map_height,
         max_monsters_per_room=max_monsters_per_room,
-        # player=player
         engine=engine
 
     )
 
     engine.update_fov()
+    engine.message_log.add_message(
 
-    # engine = Engine(entities=entities, event_handler=event_handler, player=player)
-    # engine = Engine(entities=entities, event_handler=event_handler, game_map=game_map, player=player)
-    # engine = Engine(event_handler=event_handler, game_map=game_map, player=player)
+        "Hello and welcome, adventurer, to yet another dungeon!", color.welcome_text
+
+    )
 
     with tcod.context.new_terminal(
 
@@ -78,34 +58,10 @@ def main() -> None:
 
         while True:
 
-            # root_console.print(x=player_x, y=player_y, string="@")
-            # root_console.print(x=player.x, y=player.y, string=player.char, fg=player.color)
-            engine.render(console=root_console, context=context)
-
-            # context.present(root_console)
-            # events = tcod.event.wait()
-            engine.event_handler.handle_events()
-            # engine.handle_events(events)
-            # root_console.clear()
-
-            # for event in tcod.event.wait():
-
-            #     # if event.type == "QUIT":
-
-            #     #     raise SystemExit()
-            #     action = event_handler.dispatch(event)
-
-            #     if action is None:
-            #         continue
-                
-            #     if isinstance(action, MovementAction):
-            #         # player_x += action.dx
-            #         # player_y += action.dy
-            #         player.move(dx=action.dx, dy=action.dy)
-
-            #     elif isinstance(action, EscapeAction):
-            #         raise SystemExit()
-
+            root_console.clear()
+            engine.event_handler.on_render(console=root_console)
+            context.present(root_console)
+            engine.event_handler.handle_events(context)
 
 if __name__ == "__main__":
 
