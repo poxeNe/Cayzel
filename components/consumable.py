@@ -2,6 +2,7 @@ from __future__ import annotations
 from typing import Optional, TYPE_CHECKING
 import actions
 import color
+import components.inventory
 from components.base_component import BaseComponent
 from exceptions import Impossible
 
@@ -29,6 +30,17 @@ class Consumable(BaseComponent):
 
         raise NotImplementedError()
 
+    def consume(self) -> None:
+        """Remove the consumed item from its containing inventory."""
+
+        entity = self.parent
+
+        inventory = entity.parent
+
+        if isinstance(inventory, components.inventory.Inventory):
+
+            inventory.items.remove(entity)
+
 
 class HealingConsumable(Consumable):
 
@@ -50,6 +62,8 @@ class HealingConsumable(Consumable):
                 color.health_recovered,
 
             )
+
+            self.consume()
 
         else:
 
