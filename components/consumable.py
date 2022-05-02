@@ -6,8 +6,6 @@ import components.ai
 import components.inventory
 from components.base_component import BaseComponent
 from exceptions import Impossible
-# from input_handlers import SingleRangedAttackHandler
-# from input_handlers import AreaRangedAttackHandler, SingleRangedAttackHandler
 from input_handlers import (
 
     ActionOrHandler,
@@ -19,7 +17,6 @@ from input_handlers import (
 if TYPE_CHECKING:
 
     from entity import Actor, Item
-
 
 class Consumable(BaseComponent):
 
@@ -44,7 +41,6 @@ class Consumable(BaseComponent):
         """Remove the consumed item from its containing inventory."""
 
         entity = self.parent
-
         inventory = entity.parent
 
         if isinstance(inventory, components.inventory.Inventory):
@@ -65,15 +61,12 @@ class ConfusionConsumable(Consumable):
 
        )
 
-        # self.engine.event_handler = SingleRangedAttackHandler(
         return SingleRangedAttackHandler(
 
             self.engine,
             callback=lambda xy: actions.ItemAction(consumer, self.parent, xy),
 
         )
-
-        # return None
 
     def activate(self, action: actions.ItemAction) -> None:
 
@@ -116,7 +109,6 @@ class HealingConsumable(Consumable):
     def activate(self, action: actions.ItemAction) -> None:
 
         consumer = action.entity
-
         amount_recovered = consumer.fighter.heal(self.amount)
 
         if amount_recovered > 0:
@@ -149,7 +141,6 @@ class FireballDamageConsumable(Consumable):
 
         )
 
-        # self.engine.event_handler = AreaRangedAttackHandler(
         return AreaRangedAttackHandler(
 
             self.engine,
@@ -157,8 +148,6 @@ class FireballDamageConsumable(Consumable):
             callback=lambda xy: actions.ItemAction(consumer, self.parent, xy),
 
         )
-
-        # return None
 
     def activate(self, action: actions.ItemAction) -> None:
 
@@ -181,7 +170,6 @@ class FireballDamageConsumable(Consumable):
                 )
 
                 actor.fighter.take_damage(self.damage)
-
                 targets_hit = True
 
         if not targets_hit:
@@ -223,7 +211,6 @@ class LightningDamageConsumable(Consumable):
             )
 
             target.fighter.take_damage(self.damage)
-
             self.consume()
 
         else:

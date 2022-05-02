@@ -7,7 +7,6 @@ import exceptions
 if TYPE_CHECKING:
 
     from engine import Engine
-    # from entity import Actor, Entity
     from entity import Actor, Entity, Item
 
 class Action:
@@ -62,8 +61,8 @@ class PickupAction(Action):
                 self.engine.game_map.entities.remove(item)
                 item.parent = self.entity.inventory
                 inventory.items.append(item)
-
                 self.engine.message_log.add_message(f"You picked up the {item.name}!")
+                
                 return
 
         raise exceptions.Impossible("There is nothing here to pick up.")
@@ -192,19 +191,16 @@ class MovementAction(ActionWithDirection):
 
         if not self.engine.game_map.in_bounds(dest_x, dest_y):
 
-        #    return  # Destination is out of bounds.
             # Destination is out of bounds.
             raise exceptions.Impossible("That way is blocked.")
 
         if not self.engine.game_map.tiles["walkable"][dest_x, dest_y]:
 
-        #    return  # Destination is blocked by a tile.
             # Destination is blocked by a tile.
             raise exceptions.Impossible("The way is blocked.")
 
         if self.engine.game_map.get_blocking_entity_at_location(dest_x, dest_y): 
             
-        #   return # Destination is blocked by an entity.
             # Destination is blocked by en entity.
             raise exceptions.Impossible("That way is blocked.")
 

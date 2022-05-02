@@ -10,7 +10,6 @@ if TYPE_CHECKING:
 
 class BaseComponent:
 
-    # entity: Entity  # Owning entity instance.
     parent: Entity # Owning entity instance.
 
     @property
@@ -23,5 +22,4 @@ class BaseComponent:
 
     def engine(self) -> Engine:
 
-        # return self.entity.gamemap.engine
         return self.gamemap.engine

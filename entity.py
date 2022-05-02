@@ -1,16 +1,12 @@
 from __future__ import annotations
-
 import copy
 import math
-# from typing import Tuple
-# from typing import Tuple, TypeVar, TYPE_CHECKING
 from typing import Optional, Tuple, Type, TypeVar, TYPE_CHECKING, Union
-
 from render_order import RenderOrder
-
 from xml.dom import xmlbuilder
 
 if TYPE_CHECKING:
+
     from components.ai import BaseAI
     from components.consumable import Consumable
     from components.fighter import Fighter
@@ -25,14 +21,11 @@ class Entity:
     A generic object to represent players, enemies, items, etc.
     """
 
-    # gamemap: GameMap
     parent: Union[GameMap, Inventory]
 
-    # def __init__(self, x: int, y: int, char: str, color: Tuple[int, int, int]):
     def __init__(
 
         self,
-        # gamemap: Optional[GameMap] = None,
         parent: Optional[GameMap] = None,
         x: int = 0,
         y: int = 0,
@@ -51,12 +44,6 @@ class Entity:
         self.name = name
         self.blocks_movement = blocks_movement
         self.render_order = render_order
-
-        # if gamemap:
-
-        #     # If gamemap isn't provided now then it will be set later.
-        #     self.gamemap = gamemap
-        #     gamemap.entities.add(self)
 
         if parent:
 
@@ -77,9 +64,9 @@ class Entity:
         clone = copy.deepcopy(self)
         clone.x = x
         clone.y = y
-        # clone.gamemap = gamemap
         clone.parent = gamemap
         gamemap.entities.add(clone)
+        
         return clone
 
     def place(self, x: int, y: int, gamemap: Optional[GameMap] = None) -> None:
@@ -89,12 +76,6 @@ class Entity:
         self.y = y
 
         if gamemap:
-
-            # if hasattr(self, "gamemap"): # Possibily uninitialized.
-
-            #     self.gamemap.entities.remove(self)
-
-            # self.gamemap = gamemap
 
             if hasattr(self, "parent"): # Possibly uninitialized.
 
@@ -150,11 +131,8 @@ class Actor(Entity):
         )
 
         self.ai: Optional[BaseAI] = ai_cls(self)
-
         self.fighter = fighter
-        # self.fighter.entity = self
         self.fighter.parent = self
-
         self.inventory = inventory
         self.inventory.parent = self
 

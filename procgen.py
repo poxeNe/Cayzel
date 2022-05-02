@@ -1,20 +1,13 @@
 from __future__ import annotations
-
 import random
-# from typing import Tuple
-# from typing import Iterator, Tuple
 from typing import Iterator, List, Tuple, TYPE_CHECKING
-
 import tcod
-
 import entity_factories
-
 from game_map import GameMap
 import tile_types
 
 if TYPE_CHECKING:
 
-    # from entity import Entity
     from engine import Engine
 
 class RectangularRoom:
@@ -87,7 +80,6 @@ def place_entities(
 
         if not any(entity.x == x and entity.y == y for entity in dungeon.entities):
             
-            # entity_factories.health_potion.spawn(dungeon, x, y)
             item_chance = random.random()
 
             if item_chance < 0.7:
@@ -135,21 +127,6 @@ def tunnel_between(
 
        yield x, y
 
-# def generate_dungeon(map_width, map_height) -> GameMap:
-
-#     dungeon = GameMap(map_width, map_height)
-
-#     room_1 = RectangularRoom(x=20, y=15, width=10, height=15)
-#     room_2 = RectangularRoom(x=35, y=15, width=10, height=15)
-
-#     dungeon.tiles[room_1.inner] = tile_types.floor
-#     dungeon.tiles[room_2.inner] = tile_types.floor
-
-#     for x, y in tunnel_between(room_2.center, room_1.center):
-#         dungeon.tiles[x, y] = tile_types.floor
-
-#     return dungeon
-
 def generate_dungeon(
 
     max_rooms: int,
@@ -159,14 +136,11 @@ def generate_dungeon(
     map_height: int,
     max_monsters_per_room: int,
     max_items_per_room: int,
-    # player: Entity,
     engine: Engine,
 
 ) -> GameMap:
     """Generate a new dungeon map."""
 
-    # dungeon = GameMap(map_width, map_height)
-    # dungeon = GameMap(map_width, map_height, entities=[player])
     player = engine.player
     dungeon = GameMap(engine, map_width, map_height, entities=[player])
 

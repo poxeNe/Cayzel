@@ -1,11 +1,7 @@
-# from typing import List, Reversible, Tuple
 from typing import Iterable, List, Reversible, Tuple
 import textwrap
-
 import tcod
-
 import color
-
 
 class Message:
     
@@ -77,8 +73,6 @@ class MessageLog:
 
     @classmethod
 
-    # @staticmethod
-
     def render_messages(
 
         cls,
@@ -98,7 +92,6 @@ class MessageLog:
 
         for message in reversed(messages):
 
-            # for line in reversed(textwrap.wrap(message.full_text, width)):
             for line in reversed(list(cls.wrap(message.full_text, width))):
 
                 console.print(x=x, y=y + y_offset, string=line, fg=message.fg)
