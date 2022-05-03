@@ -1,10 +1,9 @@
 from __future__ import annotations
-
 from typing import TYPE_CHECKING
-
 from components.base_component import BaseComponent
 
 if TYPE_CHECKING:
+
     from entity import Actor
 
 
@@ -39,7 +38,7 @@ class Level(BaseComponent):
 
     def requires_level_up(self) -> bool:
 
-        return self.current_xp > self.experience_to_next_level
+        return self.current_xp >= self.experience_to_next_level
 
     def add_xp(self, xp: int) -> None:
 
@@ -62,6 +61,7 @@ class Level(BaseComponent):
 
         self.current_xp -= self.experience_to_next_level
         self.current_level += 1
+        self.parent.fighter.hp = self.parent.fighter.max_hp
 
     def increase_max_hp(self, amount: int = 20) -> None:
 
