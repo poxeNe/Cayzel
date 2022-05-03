@@ -11,6 +11,7 @@ if TYPE_CHECKING:
     from engine import Engine
     from entity import Entity
     
+# First number is the floor, second number is the max amount
 max_items_by_floor = [
 
     (1, 1),
@@ -26,21 +27,72 @@ max_monsters_by_floor = [
 
 ]
 
+# floor number: [(what to generate, weighted chance to generate it)]
 item_chances: Dict[int, List[Tuple[Entity, int]]] = {
 
-    0: [(entity_factories.health_potion, 35)],
-    2: [(entity_factories.confusion_scroll, 10)],
-    4: [(entity_factories.lightning_scroll, 25)],
-    6: [(entity_factories.fireball_scroll, 25)],
+    0: [
+
+        (entity_factories.health_potion, 35)
+        
+    ],
+    1: [
+        
+        (entity_factories.shortsword, 1)
+        
+    ],
+    2: [
+        
+        (entity_factories.confusion_scroll, 10),
+        (entity_factories.leather_armor, 2),
+        (entity_factories.shortsword, 2)
+        
+    ],
+    4: [
+        
+        (entity_factories.lightning_scroll, 8),
+        (entity_factories.leather_armor, 7),
+        (entity_factories.shortsword, 10),
+        (entity_factories.falchion, 1)
+        
+    ],
+    5: [
+
+        (entity_factories.leather_armor, 10),
+        (entity_factories.shortsword, 10)
+
+    ],
+    6: [
+        
+        (entity_factories.fireball_scroll, 5),
+        (entity_factories.studded_leather_armor, 5),
+        (entity_factories.falchion, 5)
+        
+    ],
 
 }
 
 enemy_chances: Dict[int, List[Tuple[Entity, int]]] = {
 
-    0: [(entity_factories.orc, 80)],
-    3: [(entity_factories.troll, 15)],
-    5: [(entity_factories.troll, 30)],
-    7: [(entity_factories.troll, 60)],
+    0: [
+        
+        (entity_factories.orc, 80)
+        
+        ],
+    3: [
+        
+        (entity_factories.troll, 15)
+        
+        ],
+    5: [
+        
+        (entity_factories.troll, 30)
+        
+        ],
+    7: [
+        
+        (entity_factories.troll, 60)
+        
+        ],
 
 }
 
@@ -241,7 +293,7 @@ def generate_dungeon(
 
         if len(rooms) == 0:
             # The first room, where the player starts.
-            # player.x, player.y = new_room.center
+            
             player.place(*new_room.center, dungeon)
 
         else:  # All rooms after the first.

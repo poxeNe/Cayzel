@@ -47,6 +47,18 @@ def new_game() -> Engine:
 
     )
 
+    dagger = copy.deepcopy(entity_factories.dagger)
+    robe = copy.deepcopy(entity_factories.robe)
+
+    dagger.parent = player.inventory
+    robe.parent = player.inventory
+
+    player.inventory.items.append(dagger)
+    player.equipment.toggle_equip(dagger, add_message=False)
+
+    player.inventory.items.append(robe)
+    player.equipment.toggle_equip(robe, add_message=False)
+
     return engine
 
 def load_game(filename: str) -> Engine:

@@ -449,7 +449,15 @@ class InventoryEventHandler(AskUserEventHandler):
 
                 item_key = chr(ord("a") + i)
 
-                console.print(x + 1, y + i + 1, f"({item_key}) {item.name}")
+                is_equipped = self.engine.player.equipment.item_is_equipped(item)
+
+                item_string = f"({item_key}) {item.name}"
+
+                if is_equipped:
+
+                    item_string = f"{item_string} (E)"
+
+                console.print(x + 1, y + i + 1, item_string)
 
         else:
             
@@ -488,9 +496,19 @@ class InventoryActivateHandler(InventoryEventHandler):
     TITLE = "Select an item to use:"
 
     def on_item_selected(self, item: Item) -> Optional[ActionOrHandler]:
-        """Return the action for the selected item."""
+        
+        if item.consumable:
+            # Return the action for the seleced item.
 
-        return item.consumable.get_action(self.engine.player)
+            return item.consumable.get_action(self.engine.player)
+
+        elif item.equippable:
+
+            return actions.EquipAction(self.engine.player, item)
+
+        else:
+
+            return None
 
 class InventoryDropHandler(InventoryEventHandler):
     """Handle dropping an invetory item."""
