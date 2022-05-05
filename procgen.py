@@ -37,35 +37,48 @@ item_chances: Dict[int, List[Tuple[Entity, int]]] = {
     ],
     1: [
         
-        (entity_factories.shortsword, 1)
+        (entity_factories.leather_armor, 5),
+        (entity_factories.shortsword, 5),
         
     ],
     2: [
         
         (entity_factories.confusion_scroll, 10),
-        (entity_factories.leather_armor, 2),
-        (entity_factories.shortsword, 2)
+        (entity_factories.leather_armor, 10),
+        (entity_factories.shortsword, 10),
+        
+    ],
+    3: [
+        
+        (entity_factories.lightning_scroll, 5),
+        (entity_factories.fireball_scroll, 1),
         
     ],
     4: [
         
-        (entity_factories.lightning_scroll, 8),
-        (entity_factories.leather_armor, 7),
-        (entity_factories.shortsword, 10),
-        (entity_factories.falchion, 1)
+        (entity_factories.lightning_scroll, 10),
+        (entity_factories.fireball_scroll, 2),
+        (entity_factories.leather_armor, 15),
+        (entity_factories.shortsword, 15),
+        (entity_factories.studded_leather_armor, 2),
+        (entity_factories.falchion, 2),
         
     ],
     5: [
 
-        (entity_factories.leather_armor, 10),
-        (entity_factories.shortsword, 10)
+        (entity_factories.lightning_scroll, 15),
+        (entity_factories.fireball_scroll, 3),
+        (entity_factories.leather_armor, 35),
+        (entity_factories.shortsword, 35),
+        (entity_factories.studded_leather_armor, 7),
+        (entity_factories.falchion, 7),
 
     ],
     6: [
         
         (entity_factories.fireball_scroll, 5),
-        (entity_factories.studded_leather_armor, 5),
-        (entity_factories.falchion, 5)
+        (entity_factories.studded_leather_armor, 15),
+        (entity_factories.falchion, 15),
         
     ],
 
@@ -75,24 +88,80 @@ enemy_chances: Dict[int, List[Tuple[Entity, int]]] = {
 
     0: [
         
-        (entity_factories.orc, 80)
+        (entity_factories.rat, 70),
+        (entity_factories.kobold, 10),
         
         ],
+    1: [
+    
+        (entity_factories.rat, 55),
+        (entity_factories.kobold, 25),
+
+    ],
+    2: [
+
+        (entity_factories.rat, 25),
+        (entity_factories.kobold, 45),
+        (entity_factories.orc, 10)
+
+    ],
     3: [
         
-        (entity_factories.troll, 15)
+        (entity_factories.rat, 0),
+        (entity_factories.kobold, 25),
+        (entity_factories.orc, 55),
         
-        ],
+    ],
+    4: [
+
+        (entity_factories.kobold, 0),
+        (entity_factories.orc, 35),
+        (entity_factories.skeleton, 45),
+
+    ],
     5: [
         
-        (entity_factories.troll, 30)
+        (entity_factories.orc, 15),
+        (entity_factories.skeleton, 45),
+        (entity_factories.troll, 20),
         
-        ],
+    ],
+    6: [
+
+        (entity_factories.orc, 0),
+        (entity_factories.skeleton, 40),
+        (entity_factories.troll, 40),
+
+    ],
     7: [
         
-        (entity_factories.troll, 60)
+        (entity_factories.skeleton, 20),
+        (entity_factories.troll, 30),
+        (entity_factories.zombie, 10),
         
-        ],
+    ],
+    8: [
+        
+        (entity_factories.skeleton, 0),
+        (entity_factories.troll, 30),
+        (entity_factories.zombie, 15),
+        (entity_factories.harpy, 15),
+        
+    ],
+    9: [
+        
+        (entity_factories.troll, 20),
+        (entity_factories.zombie, 40),
+        (entity_factories.harpy, 20),
+        
+    ],
+    10: [
+        
+        (entity_factories.troll, 0),
+        (entity_factories.zombie, 40),
+        (entity_factories.harpy, 40),
+        
+    ],
 
 }
 

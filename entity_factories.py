@@ -13,12 +13,37 @@ player = Actor(
     name="Player",
     ai_cls=HostileEnemy,
     equipment=Equipment(),
-    fighter=Fighter(hp=30, base_defense=1, base_power=1),
+    fighter=Fighter(hp=30, base_defense=1, base_power=1, base_magic=1),
     inventory=Inventory(capacity=26),
     level=Level(level_up_base=200)
 
 )
 
+rat = Actor(
+
+    char="r",
+    color=(138, 72, 123),
+    name="Rat",
+    ai_cls=HostileEnemy,
+    equipment=Equipment(),
+    fighter=Fighter(hp=6, base_defense=0, base_power=3, base_magic=0),
+    inventory=Inventory(capacity=0),
+    level=Level(xp_given=25),
+
+)
+
+kobold = Actor(
+
+    char="k",
+    color=(255, 128, 0),
+    name="Kobold",
+    ai_cls=HostileEnemy,
+    equipment=Equipment(),
+    fighter=Fighter(hp=8, base_defense=0, base_power=3, base_magic=0),
+    inventory=Inventory(capacity=0),
+    level=Level(xp_given=50),
+
+)
 
 orc = Actor(
 
@@ -27,9 +52,22 @@ orc = Actor(
     name="Orc",
     ai_cls=HostileEnemy,
     equipment=Equipment(),
-    fighter=Fighter(hp=10, base_defense=0, base_power=3),
+    fighter=Fighter(hp=10, base_defense=1, base_power=4, base_magic=0),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=35),
+    level=Level(xp_given=75),
+
+)
+
+skeleton = Actor(
+
+    char="S",
+    color=(0, 213, 255),
+    name="Skeleton",
+    ai_cls=HostileEnemy,
+    equipment=Equipment(),
+    fighter=Fighter(hp=13, base_defense=2, base_power=5, base_magic=0),
+    inventory=Inventory(capacity=0),
+    level=Level(xp_given=100),
 
 )
 
@@ -40,9 +78,35 @@ troll = Actor(
     name="Troll",
     ai_cls=HostileEnemy,
     equipment=Equipment(),
-    fighter=Fighter(hp=16, base_defense=1, base_power=4),
+    fighter=Fighter(hp=16, base_defense=3, base_power=6, base_magic=0),
     inventory=Inventory(capacity=0),
-    level=Level(xp_given=100),
+    level=Level(xp_given=200),
+
+)
+
+zombie = Actor(
+
+    char="z",
+    color=(255, 222, 0),
+    name="Zombie",
+    ai_cls=HostileEnemy,
+    equipment=Equipment(),
+    fighter=Fighter(hp=14, base_defense=4, base_power=8, base_magic=0),
+    inventory=Inventory(capacity=0),
+    level=Level(xp_given=300),
+
+)
+
+harpy = Actor(
+
+    char="h",
+    color=(255, 0, 213),
+    name="Harpy",
+    ai_cls=HostileEnemy,
+    equipment=Equipment(),
+    fighter=Fighter(hp=12, base_defense=1, base_power=9, base_magic=0),
+    inventory=Inventory(capacity=0),
+    level=Level(xp_given=350),
 
 )
 
@@ -104,7 +168,7 @@ falchion = Item(
 
     char="/",
     color=(0, 191, 255),
-    name="Dagger",
+    name="Falchion",
     equippable=equippable.Falchion(),
 
 )
@@ -140,7 +204,7 @@ studded_leather_armor = Item(
 
     char="[",
     color=(139, 69, 19),
-    name="Studded Leaether Armor",
+    name="Studded Leather Armor",
     equippable=equippable.StuddedLeatherArmor(),
 
 )
