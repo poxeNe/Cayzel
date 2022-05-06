@@ -428,7 +428,7 @@ class InventoryEventHandler(AskUserEventHandler):
 
         y = 0
 
-        width = len(self.TITLE) + 4
+        width = len(self.TITLE) + 8
 
         console.draw_frame(
 
@@ -455,7 +455,7 @@ class InventoryEventHandler(AskUserEventHandler):
 
                 if is_equipped:
 
-                    item_string = f"{item_string} (E)"
+                    item_string = f"({item_key}) {item.name} (E)"
 
                 console.print(x + 1, y + i + 1, item_string)
 
@@ -762,8 +762,10 @@ class HistoryViewer(EventHandler):
 
         # Draw a frame with a custom banner title.
         log_console.draw_frame(0, 0, log_console.width, log_console.height)
+
         log_console.print_box(
-            0, 0, log_console.width, 1, "┤Message history├", alignment=tcod.CENTER
+
+            0, 0, log_console.width, 1, "┤Message History├", alignment=tcod.CENTER
        
     )
 

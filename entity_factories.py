@@ -114,7 +114,7 @@ confusion_scroll = Item(
 
     char="~",
     color=(207, 63, 255),
-    name="Confusion Scroll",
+    name="Scroll of Confusion",
     consumable=consumable.ConfusionConsumable(number_of_turns=10),
 
 )
@@ -123,7 +123,7 @@ fireball_scroll = Item(
 
     char="~",
     color=(255, 0, 0),
-    name="Fireball Scroll",
+    name="Scroll of Fireball",
     consumable=consumable.FireballDamageConsumable(damage=12, radius=3),
 
 )
@@ -131,7 +131,7 @@ fireball_scroll = Item(
 health_potion = Item(
 
     char="!",
-    color=(127, 0, 255),
+    color=(255, 15, 25),
     name="Health Potion",
     consumable=consumable.HealingConsumable(amount=6),
 
@@ -141,7 +141,7 @@ lightning_scroll = Item(
 
     char="~",
     color=(255, 255, 0),
-    name="Lightning Scroll",
+    name="Scroll of Lightning",
     consumable=consumable.LightningDamageConsumable(damage=20, maximum_range=5),
 
 )
