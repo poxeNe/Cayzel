@@ -8,11 +8,21 @@ from tcod.map import compute_fov
 import exceptions
 from message_log import MessageLog
 import render_functions
+import sys
+from os import path
 
 if TYPE_CHECKING:
     
     from entity import Actor
     from game_map import GameMap, GameWorld
+
+if getattr(sys, 'frozen', False):
+    
+    game_dir = path.dirname(sys.executable)
+
+else:
+
+    game_dir = path.dirname(__file__)
 
 class Engine:
 
@@ -89,6 +99,6 @@ class Engine:
 
         save_data = lzma.compress(pickle.dumps(self))
         
-        with open(filename, "wb") as f:
+        with open(path.join(game_dir, filename), "wb") as f:
 
             f.write(save_data)

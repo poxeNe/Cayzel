@@ -11,9 +11,19 @@ from engine import Engine
 import entity_factories
 from game_map import GameWorld
 import input_handlers
+import sys
+from os import path
+
+if getattr(sys, 'frozen', False):
+    
+    game_dir = path.dirname(sys.executable)
+
+else:
+
+    game_dir = path.dirname(__file__)
 
 # Load the background image and remove the alpha channel.
-background_image = tcod.image.load("./art/menu_background.png")[:, :, :3]
+background_image = tcod.image.load(path.join(game_dir, "./art/menu_background.png"))[:, :, :3]
 
 
 def new_game() -> Engine:
@@ -64,7 +74,7 @@ def new_game() -> Engine:
 def load_game(filename: str) -> Engine:
     """Load an Engine instance from a file."""
 
-    with open(filename, "rb") as f:
+    with open(path.join(game_dir, filename), "rb") as f:
 
         engine = pickle.loads(lzma.decompress(f.read()))
 

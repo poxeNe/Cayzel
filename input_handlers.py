@@ -13,11 +13,21 @@ from actions import (
 )
 import color
 import exceptions
+import sys
+from os import path
 
 if TYPE_CHECKING:
 
     from engine import Engine
     from entity import Item
+
+if getattr(sys, 'frozen', False):
+    
+    game_dir = path.dirname(sys.executable)
+
+else:
+
+    game_dir = path.dirname(__file__)
 
 MOVE_KEYS = {
 
@@ -721,9 +731,9 @@ class GameOverEventHandler(EventHandler):
     def on_quit(self) -> None:
         """Handle exiting out of a finished game."""
 
-        if os.path.exists("savegame.sav"):
+        if os.path.exists(path.join(game_dir, "savegame.sav")):
 
-            os.remove("savegame.sav") # Deletes the active save file.
+            os.remove(path.join(game_dir, "savegame.sav")) # Deletes the active save file.
 
         raise exceptions.QuitWithoutSaving() # Avoid saving a finished game.
 

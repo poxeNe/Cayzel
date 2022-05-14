@@ -5,8 +5,17 @@ import color
 import exceptions
 import input_handlers
 import setup_game
-
 import faulthandler; faulthandler.enable()
+import sys
+from os import path
+
+if getattr(sys, 'frozen', False):
+    
+    game_dir = path.dirname(sys.executable)
+
+else:
+
+    game_dir = path.dirname(__file__)
 
 def save_game(handler: input_handlers.BaseEventHandler, filename: str) -> None:
     """If the current event handler has an active Engine then save it."""
@@ -24,9 +33,11 @@ def main() -> None:
 
     tileset = tcod.tileset.load_tilesheet(
 
-        "./art/dejavu10x10_gs_tc.png", 32, 8, tcod.tileset.CHARMAP_TCOD
+        path.join(game_dir, "./art/dejavu10x10_gs_tc.png"),
+        32, 8,
+        tcod.tileset.CHARMAP_TCOD
 
-    )
+    ) 
 
     handler: input_handlers.BaseEventHandler = setup_game.MainMenu()
     
