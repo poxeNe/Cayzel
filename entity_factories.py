@@ -91,7 +91,7 @@ zombie = Actor(
     name="Zombie",
     ai_cls=HostileEnemy,
     equipment=Equipment(),
-    fighter=Fighter(hp=14, base_defense=4, base_power=8, base_magic=0),
+    fighter=Fighter(hp=14, base_defense=4, base_power=10, base_magic=0),
     inventory=Inventory(capacity=0),
     level=Level(xp_given=300),
 
@@ -104,7 +104,7 @@ harpy = Actor(
     name="Harpy",
     ai_cls=HostileEnemy,
     equipment=Equipment(),
-    fighter=Fighter(hp=12, base_defense=1, base_power=9, base_magic=0),
+    fighter=Fighter(hp=12, base_defense=1, base_power=12, base_magic=0),
     inventory=Inventory(capacity=0),
     level=Level(xp_given=350),
 
