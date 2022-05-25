@@ -8,5 +8,5 @@
 - G: Pickup item.
 - D: Drop item.
 - V: Message history.
-- >: Descend.
+- ">": Descend.
 - /: Look around.
